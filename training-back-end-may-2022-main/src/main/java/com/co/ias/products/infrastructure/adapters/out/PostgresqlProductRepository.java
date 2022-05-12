@@ -40,7 +40,7 @@ public class PostgresqlProductRepository implements ProductRepository {
             preparedStatement.execute();
 
         } catch (SQLException exception) {
-            throw new RuntimeException("Error querying database", exception);
+            throw new RuntimeException("Error querying database " + exception.getMessage(), exception);
         }
     }
 

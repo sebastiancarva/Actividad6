@@ -7,7 +7,7 @@ public class ProductDiscount {
 
     public ProductDiscount(Integer value) {
         Validate.notNull(value, "Discount of product can not be null");
-        Integer start = 0, end = 80;
+        Integer start = 0, end = 100;
         Validate.inclusiveBetween(start, end, value);
         this.value = value;
     }
