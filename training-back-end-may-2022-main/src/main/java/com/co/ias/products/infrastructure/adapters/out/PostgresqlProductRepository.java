@@ -68,7 +68,19 @@ public class PostgresqlProductRepository implements ProductRepository {
 
     @Override
     public void update(Product product) {
+    String sql = "UPDATE products set name = ?, type_of_product = ?, price = ? where id = ? ";
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
+            preparedStatement.setString(1, product.getProductName().toString());
+            preparedStatement.setInt(2, product.getTypeOfProduct().getValue());
+                        preparedStatement.setLong(3, product.getProductPrice().getValue());
+            preparedStatement.setLong(4, product.getProductId().getValue());
+            preparedStatement.execute();
+
+        } catch (SQLException exception) {
+            throw new RuntimeException("Error querying database " + exception.getMessage(), exception);
+        }
     }
 
     @Override
